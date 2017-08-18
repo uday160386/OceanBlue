@@ -7,20 +7,43 @@ node {
             checkout scm
         }
         stage ('Build') {
+        parallel 'DEV':{
+        
+        },
+        'SIT'{
+        },
+        'UAT'{
+        }
+        'PROD'{
+        }
            
         }
-        stage ('Tests') {
-            parallel 'static': {
+        stage ('Unit') {
+            parallel 'unit': {
               
             },
-            'unit': {
-               
-            },
-            'integration': {
+           'integration': {
                
             }
+            
         }
+        
+         stage ('Functional UI Tests') {
+        parallel 'Android:{
+            }
+            'iOS'{
+            }
         stage ('Deploy') {
+        
+         parallel 'DEV':{
+        
+        },
+        'SIT'{
+        },
+        'UAT'{
+        }
+        'PROD'{
+        }
            
         }
     } catch (err) {
